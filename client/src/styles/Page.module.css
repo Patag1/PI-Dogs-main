@@ -1,0 +1,49 @@
+.container {
+    margin-top: 40px;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    background-color: #0F0F0F;
+    border-radius: 2vh;
+}
+
+.prevnext {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.page {
+    background-color: #BBB;
+    border-radius: 5px;
+    font-family: Whyte;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: transform .3s ease, background-color .3s ease;
+}
+
+.active {
+    background-color: white !important;
+    cursor: default !important;
+    transform: none !important;
+}
+
+.chev {
+    cursor: pointer;
+    transition: transform .3s ease;
+}
+
+.page:hover {
+    background-color: #EEE;
+    transform: scale(1.05);
+}
+
+.chev:hover {
+    color: #BBBBBB;
+    transform: scale(1.05);
+}

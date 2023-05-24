@@ -1,0 +1,36 @@
+.body {
+    height: 100vh;
+    padding-top: 5vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.h2 {
+    letter-spacing: -6px;
+    font-family: BentonSans;
+    font-size: 6rem;
+    font-weight: bolder;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 3px;
+}
+
+.icon {
+    animation: rocking 1.25s infinite ease-in-out;
+}
+
+@keyframes rocking {
+    0% {
+        transform: rotate(-15deg);
+    }
+
+    50% {
+        transform: rotate(15deg);
+    }
+
+    100% {
+        transform: rotate(-15deg);
+    }
+}

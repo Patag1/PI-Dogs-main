@@ -1,0 +1,14 @@
+
+.h3 {
+    letter-spacing: -4px;
+    font-family: BentonSans;
+    font-size: 4rem;
+    font-weight: bolder;
+}
+
+.h4 {
+    letter-spacing: -2px;
+    font-family: BentonSans;
+    font-size: 2rem;
+    font-weight: bolder;
+}

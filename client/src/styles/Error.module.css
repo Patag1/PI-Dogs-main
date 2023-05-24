@@ -1,0 +1,42 @@
+.body {
+    max-height: 100vh;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #EEEEEE;
+}
+
+.container {
+    padding: 30px;
+    border-radius: 2vh;
+    background-color: #FF7582;
+}
+
+.back {
+    padding: 3px;
+    border-radius: 50%;
+    background-color: #EEEEEE;
+    transition: transform .3s ease;
+}
+
+.back:hover {
+    transform: scale(1.1);
+}
+
+.header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.h1 {
+    color: white;
+    margin-top: 18px;
+}
+
+.p {
+    color: #EEEEEE;
+}

@@ -1,0 +1,82 @@
+.body {
+    height: 85vh;
+    padding-top: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    background-color: #2A3950;
+}
+
+.container {
+    width: 300px;
+    padding: 25px 50px;
+    background-color: #EEE;
+    border: 1px solid black;
+    border-radius: 3vh 0;
+    box-shadow: 5px 5px 0 black;
+    transition: all .3s ease;
+}
+
+.container:hover {
+    transform: scale(1.05);
+    box-shadow: 10px 10px 0 black;
+}
+
+.container h1 {
+    margin: 0;
+}
+
+.react {
+    transition: all .3s ease;
+}
+
+.react:hover {
+    filter: brightness(150%);
+    transform: scale(1.05);
+    transform: rotate(180deg);
+}
+
+.header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+.socials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.link {
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: .5vh;
+    box-shadow: 2px 2px 0 black;
+    transition: all .3s ease;
+}
+
+.linkedin {
+    background-color: #0A66C2;
+}
+
+.github {
+    background-color: #24292E;
+}
+
+.link:hover {
+    transform: translateY(-2px);
+    filter: brightness(115%);
+    box-shadow: 4px 4px 0 black;
+}
+
+.link:active {
+    transform: translateY(2px);
+    box-shadow: none;
+}

@@ -1,0 +1,22 @@
+.body {
+    min-height: 100vh;
+    height: fit-content;
+    padding: 15vh 0 15vh 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: #2A3950;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 35px 0 35px 0;
+    gap: 25px;
+    width: 90%;
+    background-color: #355C7D;
+    border-radius: 2vh;
+}

@@ -1,0 +1,53 @@
+.body {
+    width: 60%;
+    margin: -10px 20px 20px 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #161616;
+    border-radius: 1vh;
+}
+
+.srcdiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.search {
+    width: 200px;
+    height: 20px;
+    padding: 5px 10px;
+    font-family: Helmet;
+    background-color: #BBB;
+    border: 2px solid black;
+    border-radius: 5vh;
+    transition: border .3s ease, outline .3s ease;
+}
+
+.search:focus {
+    border: 2px solid #F5F5F5;
+    outline: 2px solid rgba(0, 0, 255, 0.747);
+}
+
+.sort {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.sortbtns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.sortbtn {
+    background-color: #E37E51;
+    color: white;
+}
+

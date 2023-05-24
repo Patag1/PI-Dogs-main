@@ -1,0 +1,53 @@
+import {
+    AlertTriangle,
+    ArrowBigLeft,
+    ArrowDownNarrowWide,
+    ArrowDownWideNarrow,
+    Atom,
+    Bone,
+    ChevronLeft,
+    ChevronRight,
+    ChevronFirst,
+    ChevronLast,
+    Dog,
+    Filter,
+    Github,
+    Minus,
+    MoreHorizontal,
+    Linkedin,
+    Loader2,
+    Info,
+    Plus,
+    RotateCw,
+    Search,
+    X,
+    // ...
+} from 'lucide-react';
+
+export const Icons = {
+    AlertTriangle,
+    ArrowBigLeft,
+    ArrowDownNarrowWide,
+    ArrowDownWideNarrow,
+    Atom,
+    Bone,
+    ChevronLeft,
+    ChevronRight,
+    ChevronFirst,
+    ChevronLast,
+    Dog,
+    Filter,
+    Github,
+    Minus,
+    MoreHorizontal,
+    Linkedin,
+    Loader2,
+    Info,
+    Plus,
+    RotateCw,
+    Search,
+    X,
+    // ...
+}
+
+export default Icons;
