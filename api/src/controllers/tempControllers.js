@@ -6,7 +6,7 @@ const getTemps = async () => {
     if (data) {
         const dbData = await Temperaments.findAll({
             attributes: {
-                exclude: ['id', 'createdAt', 'updatedAt']
+                exclude: ['createdAt', 'updatedAt']
             }
         });
 

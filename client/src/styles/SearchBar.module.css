@@ -13,7 +13,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .search {
@@ -24,12 +24,33 @@
     background-color: #BBB;
     border: 2px solid black;
     border-radius: 5vh;
-    transition: border .3s ease, outline .3s ease;
+    transition: all .3s ease;
 }
 
 .search:focus {
+    background-color: #F5F5F5;
     border: 2px solid #F5F5F5;
     outline: 2px solid rgba(0, 0, 255, 0.747);
+}
+
+.btn1 {
+    width: 70px;
+}
+
+.btn2 {
+    width: 70px;
+}
+
+.origin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnacc {
+    width: fit-content;
+    padding: 6.5px;
+    background-color: #EEE;
 }
 
 .sort {

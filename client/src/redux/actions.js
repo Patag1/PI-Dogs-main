@@ -43,17 +43,17 @@ export const getDogs = name => dispatch => {
         });
 }
 
-export const dogsFilter = (term, value) => dispatch => {
+export const dogsFilter = (value) => dispatch => {
     return dispatch({
         type: DOGS_FILTER,
-        payload: {term, value}
+        payload: {value}
     })
-        .catch(error => {
-            dispatch({
-                type: ERROR,
-                payload: ['Yikes! Error while trying to filter dogs', error]
-            });
-        });
+        // .catch(error => {
+        //     dispatch({
+        //         type: ERROR,
+        //         payload: ['Yikes! Error while trying to filter dogs', error]
+        //     });
+        // });
 }
 
 export const dogsSort = sort => dispatch => {

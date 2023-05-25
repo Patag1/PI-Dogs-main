@@ -33,31 +33,35 @@ const rootReducer = (state = initialState, action) => {
             }
         
         case DOGS_FILTER:
-            const {term, value} = action.payload;
-            const regex = new RegExp(value, 'ig');
-            const filtered = term === 'continent'
-                ? state.dogs.filter(c => c.continent === value)
-                : term === 'activity'
-                ? state.dogs.filter(c => c.Activities.some(a => regex.test(a.name)))
-                : null
+            const { value } = action.payload;
+            let filtered;
+            if (value === 'API') {
+                filtered = state.dogs.filter(dog => dog.image === 'image/url');
+            } else if (value === 'DB') {
+                filtered = state.dogs.filter(dog => dog.image !== 'image/url');
+            } else {
+                const regex = new RegExp(value, 'ig');
+                filtered = state.dogs.filter(dogs => dogs.temperaments.some(temp => regex.test(temp.name)));
+            }
             return {
                 ...state,
                 filteredDogs: filtered,
                 error: null
             }
-        
+
         case DOGS_SORT:
             const sort = action.payload;
-            console.log(sort)
-            const sorted = state.dogs.slice().sort((a, b) =>
+            // console.log(sort)
+            const sorted = state.dogs.sort((a, b) =>
                 sort === 'az' ? a.name.localeCompare(b.name)
                 : sort === 'za' ? b.name.localeCompare(a.name) : null
                 // : sort === 'asc' ? parseInt(b.weight.metric.split(' ')[0]) - parseInt(a.weight.metric.split(' ')[0])
                 // : parseInt(a.weight.metric.split(' ')[0]) - parseInt(b.weight.metric.split(' ')[0])
             );
+            // console.log(sorted)
             return {
                 ...state,
-                dogs: sorted,
+                filteredDogs: sorted,
                 error: null
             }
 

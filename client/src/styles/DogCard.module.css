@@ -1,4 +1,5 @@
 .card {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -25,6 +26,68 @@
     transform: scale(0.95);
 }
 
+.ctnbadge {
+    z-index: 10;
+    position: absolute;
+    top: -3.2%;
+    right: -5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.badgemsg {
+    position: absolute;
+    height: 18px;
+    width: 130px;
+    opacity: 0;
+    right: -10%;
+    padding: 2px 0 2px 5px;
+    color: rgba(172, 172, 172, 0.900);
+    background-color: rgba(15, 15, 15, 0.900);
+    border-radius: 2vh 0 0 2vh;
+    transition: all .3s ease;
+}
+
+.badge {
+    padding: 3px;
+    background-color: aqua;
+    border-radius: 50%;
+    animation: rock 3s ease infinite;
+}
+
+.ctnbadge:hover .badgemsg {
+    right: 50%;
+    opacity: 1;
+}
+
+@keyframes rock {
+    0% {
+        transform: rotate(0deg);
+    }
+    5% {
+        transform: rotate(15deg) scale(1.2);
+    }
+    10% {
+        transform: rotate(-15deg) scale(1.2);
+    }
+    20% {
+        transform: rotate(0deg) scale(1);
+    }
+    40% {
+        transform: rotate(0deg);
+    }
+    60% {
+        transform: rotate(0deg);
+    }
+    80% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
 .content {
     padding-left: 10px;
 }
@@ -37,13 +100,6 @@
     border: 1px solid black;
     border-bottom: 2px solid black;
     border-radius: 1.8vh 0 0 0;
-}
-
-.badge {
-    z-index: 10;
-    position: absolute;
-    top: 0;
-    background-color: aqua;
 }
 
 .img {
@@ -79,8 +135,8 @@
     width: 120px;
     position: absolute;
     padding: 10px;
-    background-color: #0F0F0F;
-    color: #ACACAC;
+    background-color: rgba(15, 15, 15, 0.900);
+    color: rgba(172, 172, 172, 0.900);
     border: 1px solid black;
     border-radius: 1vh;
     transition: opacity .3s ease-in-out;

@@ -8,19 +8,21 @@ const DogCard = props => {
     id,
     image,
     name,
-    temps,
+    temperaments,
     weight,
   } = props.data;
 
   const wgtDbApi = image === 'image/url' ? weight : `${weight?.metric} kg`;
+
+  // image === 'image/url' && console.log(props.data)
 
   return (
     <Link to={`/dogs/${id}`} className={DogCardCSS.card}>
       {
         image === 'image/url' ? (
           <div className={DogCardCSS.ctnbadge}>
-            <Icons.Bone className={DogCardCSS.badge} size={20} color='black' />
             <p className={DogCardCSS.badgemsg}>Created by you!</p>
+            <Icons.Bone className={DogCardCSS.badge} size={20} color='black' />
           </div>
         ) : []
       }
@@ -40,10 +42,10 @@ const DogCard = props => {
         <span className={DogCardCSS.info}>Temperaments <Icons.Info className={DogCardCSS.infoicon} size={20} color='black' />
           <div className={DogCardCSS.temps}>
             {
-              !temps ? (
+              !temperaments ? (
                 <p>N/A</p>
-              ) : temps?.map(t => (
-                <p key={t}>{t}</p>
+              ) : temperaments?.map((t, index) => (
+                <p key={index}>{t.name}</p>
               ))
             }
           </div>

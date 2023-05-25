@@ -25,11 +25,11 @@ const validate = async (req, res, next) => {
     
     let temps = await Temperaments.findAll({
         attributes: {
-            exclude: ['id', 'createdAt', 'updatedAt']
+            exclude: ['name', 'createdAt', 'updatedAt']
         }
     });
 
-    temps = temps.map(t => t.name);
+    temps = temps.map(t => t.id);
 
     if (!temperaments.every(temp => temps.includes(temp))) return res.status(400).json({ error: 'Invalid temperament/s!' });
 

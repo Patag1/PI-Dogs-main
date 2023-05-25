@@ -42,7 +42,7 @@ const Form = ({ show }) => {
     } : {
         sys: 'imp',
         opp: 'met', 
-        height: 'ft',
+        height: 'in',
         weight: 'lbs',
     }
 
@@ -83,8 +83,6 @@ const Form = ({ show }) => {
     const params = [form, setForm, setMsg, error, setError, unit];
 
     const temps = useSelector(state => state.temps);
-
-    console.log(form.temps)
 
     return (
         <div className={switchClass}>

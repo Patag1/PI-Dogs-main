@@ -5,7 +5,7 @@ const { API_KEY } = process.env;
 const filterData = require('../middlewares/filter');
 
 
-const getDogs = async name => {
+const getDogs = async (name) => {
     if (name) {
         const regex = new RegExp(name, 'ig');
         const dogsApi = await axios.get(API_KEY)
@@ -26,18 +26,18 @@ const getDogs = async name => {
             }
         });
 
-        if (!dogsApi.length && !dogsDb.length) return { message: 'No dogs found' };
-        if (dogsApi.length && !dogsDb.length) return dogsApi;
-        if (!dogsApi.length && dogsDb.length) return dogsDb;
+        if (dogsDb && !dogsApi) return dogsDb;
+        if (!dogsDb && dogsApi) return dogsApi;
+        if (dogsDb && dogsApi) return dogsDb.concat(dogsApi);
 
-        return dogsApi.concat(dogsDb);
+        return { message: 'No dogs found' };
     }
 
     const dogsApi = await axios.get(API_KEY)
         .then(response => filterData(response.data));
 
     const dogsDb = await Dog.findAll({
-        attributes: { 
+        attributes: {
             exclude: ['updatedAt']
         },
         include: [
@@ -48,11 +48,10 @@ const getDogs = async name => {
             }
         ]
     });
-
-    if (dogsApi.length && !dogsDb.length) return dogsApi;
-
-    return dogsApi.concat(dogsDb);
+    
+    return dogsDb.concat(dogsApi);
 }
+
 
 const getDogById = async id => {
     const intId = parseInt(id);
@@ -93,12 +92,19 @@ const postDog = async (
         height,
         weight,
         lifespan,
-        temperaments
     });
 
-    await newDog.addTemperaments(temperaments);
+    console.log(temperaments)
 
-    console.log('hola?')
+    const temps = await Temperaments.findAll({
+        where: {
+            id: temperaments
+        }
+    });
+
+    console.log(temps)
+
+    await newDog.addTemperaments(temps);
 
     return newDog;
 }

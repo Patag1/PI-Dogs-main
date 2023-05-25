@@ -8,7 +8,11 @@ const filterData = (apiData) => {
             height: dog?.height,
             weight: dog?.weight,
             lifespan: dog?.life_span,
-            temps: dog?.temperament?.split(', '),
+            temperaments: dog?.temperament?.split(', ').map(t => {
+                return {
+                    name: t
+                }
+            }),
         }
     })
 }

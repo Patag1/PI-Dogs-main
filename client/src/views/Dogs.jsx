@@ -12,6 +12,7 @@ import SearchBar from './components/SearchBar'
 const Dogs = () => {
   const perPage = 8;
 
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState({
     error: false,
     message: ''
@@ -21,6 +22,7 @@ const Dogs = () => {
 
   useEffect(() => {
     dispatch(getDogs())
+      .then(() => setLoading(false))
       .catch(error => {
         setError({
           error: true,
@@ -29,16 +31,20 @@ const Dogs = () => {
       });
   }, [])
 
-  const dogs = useSelector(state => state.dogs)
+  const dogs = useSelector(state => state.filteredDogs)
+  // console.log(dogs)
   // const filtered = useSelector(state => state.filteredDogs)
   const page = useSelector(state => state.page)
-
+  // console.log(page)
+  
   const dogsPerPage = dogs?.slice(page * perPage, (page * perPage) + perPage);
+
+  console.log(dogsPerPage)
 
   return (
     <Suspense fallback={<Loading />}>
       {
-        error.error ? <Error msg={error.message} /> : (
+        loading ? (<Loading />) : error.error ? <Error msg={error.message} /> : (
           <div className={DogsCSS.body}>
             <Navbar />
 
@@ -46,9 +52,9 @@ const Dogs = () => {
             
             <div className={DogsCSS.container}>
               {
-                dogsPerPage.map(dog => (
+                dogsPerPage.length ? dogsPerPage.map(dog => (
                   <DogCard key={dog.name} data={dog} />
-                ))
+                )) : (<p className={DogsCSS.nodata}>No dogs found!</p>)
               }
             </div>
 

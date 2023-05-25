@@ -8,9 +8,10 @@ const {
 
 const getDogsHandler = async (req, res) => {
     const { name } = req.query;
+    const { origin } = req.body;
 
     try {
-        const dogs = name ? await getDogs(name) : await getDogs();
+        const dogs = name ? await getDogs(name, origin) : await getDogs();
         return res.status(200).json(dogs);
     } catch (error) {
         return res.status(500).json({ error: error.message });

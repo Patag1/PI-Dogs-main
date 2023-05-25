@@ -5,10 +5,12 @@ import { getDogById } from '../redux/actions'
 import Error from './components/Error'
 import Loading from './components/Loading'
 import Navbar from './components/Navbar'
-import DogDetailCSS from '../styles/DogDetail.module.css'
 import Icons from './components/Icons'
+import DogDetailCSS from '../styles/DogDetail.module.css'
+import NavbarCSS from '../styles/Navbar.module.css'
 
 const DogDetail = () => {
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState({
         error: false,
         message: '',
@@ -25,9 +27,9 @@ const DogDetail = () => {
 
     const { id } = useParams();
     
-    
     useEffect(() => {
         dispatch(getDogById(id))
+            .then(() => setLoading(false))
             .catch(error => {
                 setError({
                     error: false,
@@ -46,11 +48,12 @@ const DogDetail = () => {
     return (
         <Suspense fallback={<Loading />}>
             {
-                error.error ? <Error msg={error.message} /> : (
+                loading ? (<Loading />) : error.error ? <Error msg={error.message} /> : (
                     <>
                         <Link to='/dogs' className={DogDetailCSS.back}>
                             <Icons.ArrowBigLeft size={40} color='white' />
                         </Link>
+                        
                         <div className={DogDetailCSS.body}>
 
                             <Navbar />
@@ -64,10 +67,29 @@ const DogDetail = () => {
                                 </div>
                                 <div className={DogDetailCSS.specs}>
                                     <div>
-                                        <p>Height: {height}</p>
-                                        <p>Weight: {weight}</p>
-                                        <p>Lifespan: {dog?.lifespan}</p>
-                                        <p>Temperaments: <br /> {dog?.temps?.join(', ')}</p>
+                                        <div className={DogDetailCSS.data}>
+                                            <p>Height:</p>
+                                            <p>{height}</p>
+                                        </div>
+                                        <div className={DogDetailCSS.data}>
+                                            <p>Weight:</p>
+                                            <p>{weight}</p>
+                                        </div>
+                                        <div className={DogDetailCSS.data}>
+                                            <p>Lifespan:</p>
+                                            <p>{dog?.lifespan}</p>
+                                        </div>
+                                        <hr />
+                                        <p>Temperaments:</p>
+                                        <ul>
+                                            {
+                                                dog?.temperaments?.map((t, index) => (
+                                                    <li key={index} className={NavbarCSS.temp}>{t.name}</li>
+                                                ))
+                                            }
+                                        </ul>
+                                        <br />
+                                        <hr />
                                     </div>
                                     <button className={switchClass} onClick={() => setSystem(unit.toggle)}>
                                         {system === 'met' ? 'METRIC' : 'IMPERIAL'}

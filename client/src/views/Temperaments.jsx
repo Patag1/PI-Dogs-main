@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getTemps } from '../redux/actions'
 import { useDispatch, useSelector } from 'react-redux';
+import Loading from './components/Loading';
 import Error from './components/Error';
 import Navbar from './components/Navbar';
 import TempsCSS from '../styles/Temps.module.css'
@@ -9,6 +10,7 @@ import DogDetailCSS from '../styles/DogDetail.module.css'
 import Icons from './components/Icons';
 
 const Temperaments = () => {
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState({
     error: false,
     message: ''
@@ -18,6 +20,7 @@ const Temperaments = () => {
 
   useEffect(() => {
     dispatch(getTemps())
+      .then(() => setLoading(false))
       .catch(error => {
         setError({
           error: true,
@@ -30,12 +33,13 @@ const Temperaments = () => {
 
   return (
     <>
-      <Link to='/dogs' className={DogDetailCSS.back}>
-        <Icons.ArrowBigLeft size={40} color='white' />
-      </Link>
       {
-        error.error ? (<Error msg={error.message} />) : (
+        loading ? (<Loading />) : error.error ? (<Error msg={error.message} />) : (
           <div className={TempsCSS.body}>
+            <Link to='/dogs' className={DogDetailCSS.back}>
+              <Icons.ArrowBigLeft size={40} color='white' />
+            </Link>
+
             <Navbar />
 
             <div className={TempsCSS.container}>
