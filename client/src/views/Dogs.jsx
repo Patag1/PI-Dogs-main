@@ -32,14 +32,9 @@ const Dogs = () => {
   }, [])
 
   const dogs = useSelector(state => state.filteredDogs)
-  // console.log(dogs)
-  // const filtered = useSelector(state => state.filteredDogs)
   const page = useSelector(state => state.page)
-  // console.log(page)
   
   const dogsPerPage = dogs?.slice(page * perPage, (page * perPage) + perPage);
-
-  console.log(dogsPerPage)
 
   return (
     <Suspense fallback={<Loading />}>

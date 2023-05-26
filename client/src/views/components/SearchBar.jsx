@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { getDogs, dogsFilter, dogsSort } from '../../redux/actions'
+import { getDogs, dogsFilter, dogsSort, page } from '../../redux/actions'
 import Icons from './Icons'
 import SearchCSS from '../../styles/SearchBar.module.css'
 import NavbarCSS from '../../styles/Navbar.module.css'
@@ -23,6 +23,7 @@ const SearchBar = () => {
 
   const handleFilter = e => {
     const { name } = e.target;
+    if (name === 'API' || name === 'DB') dispatch(page(0));
     dispatch(dogsFilter(name));
     setOrigin(originToggle);
   }
@@ -32,27 +33,24 @@ const SearchBar = () => {
     setOrigin('API');
   }
 
-  
+
   // SORT
 
-  const [alphsort, setAlphsort] = useState('az');
-  const [wgtsort, setWgtsort] = useState('');
+  const [azSort, setAzSort] = useState('az');
+  const [wgtSort, setWgtSort] = useState('asc');
 
   const handleSort = e => {
     const { name, value } = e.target;
 
-    if (name === 'alph') {
-      dispatch(dogsSort(value));
-      setAlphsort(alphSort[0]);
-    }
+    dispatch(dogsSort(value));
+
+    return name === 'alph' ? setAzSort(azToggle) : setWgtSort(wgtToggle);
   }
 
-  const alphSort = [
-    alphsort === 'az' || !alphsort ? 'za' : 'az',
-    alphsort === 'az' || !alphsort ? 'A-Z' : 'Z-A'
-  ]
+  const azToggle = azSort === 'az' ? 'za' : 'az';
+  const azText = azSort === 'az' ? 'A-Z' : 'Z-A';
 
-  const wgtToggle = wgtsort === 'des' || !wgtsort ? 'asc' : 'des';
+  const wgtToggle = wgtSort === 'des' ? 'asc' : 'des';
 
   const btn1 = `${NavbarCSS.btn1} ${SearchCSS.btn1}`
   const btn2 = `${NavbarCSS.btn2} ${SearchCSS.btn2}`
@@ -74,16 +72,16 @@ const SearchBar = () => {
       <div className={SearchCSS.sort}>
         <Icons.Filter size={25} color='white' />
         <div className={SearchCSS.sortbtns}>
-          <button name='alph' value={alphsort} className={btn1} onClick={(e) => handleSort(e)}>
-            {alphSort[1]}
+          <button name='alph' value={azSort} className={btn1} onClick={(e) => handleSort(e)}>
+            {azText}
           </button>
-          <button className={NavbarCSS.btn1} onClick={() => setWgtsort(wgtToggle)}>
+          <button name='wgt' value={wgtSort} className={NavbarCSS.btn1} onClick={(e) => handleSort(e)}>
             WEIGHT
             {
-              wgtsort === 'asc' ? (
-                <Icons.ArrowDownNarrowWide size={15} color='white' />
-              ) : (
+              wgtSort === 'asc' ? (
                 <Icons.ArrowDownWideNarrow size={15} color='white' />
+                ) : (
+                <Icons.ArrowDownNarrowWide size={15} color='white' />
               )
             }
           </button>

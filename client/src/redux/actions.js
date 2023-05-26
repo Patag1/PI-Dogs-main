@@ -1,11 +1,11 @@
 export const GET_DOGS = 'GET_DOGS';
-export const GET_DOG_ID = 'GET_DOG_ID';
+export const DOGS_TEMP = 'DOGS_TEMP';
 export const DOGS_FILTER = 'DOGS_FILTER';
 export const DOGS_SORT = 'DOGS_SORT';
+export const GET_DOG_ID = 'GET_DOG_ID';
 export const POST_DOG = 'POST_DOG';
 export const DELETE_DOG = 'DELETE_DOG';
 export const GET_TEMPS = 'GET_TEMPS';
-// export const PUT_DOG = 'PUT_DOG';
 export const PAGE = 'PAGE';
 export const ERROR = 'ERROR';
 
@@ -43,6 +43,13 @@ export const getDogs = name => dispatch => {
         });
 }
 
+export const dogsTemp = search => dispatch => {
+    return dispatch({
+        type: DOGS_TEMP,
+        payload: {search}
+    })
+}
+
 export const dogsFilter = (value) => dispatch => {
     return dispatch({
         type: DOGS_FILTER,
@@ -56,10 +63,10 @@ export const dogsFilter = (value) => dispatch => {
         // });
 }
 
-export const dogsSort = sort => dispatch => {
+export const dogsSort = term => dispatch => {
     return dispatch({
         type: DOGS_SORT,
-        payload: sort
+        payload: { term }
     })
         // .catch(error => {
         //     dispatch({
@@ -123,27 +130,6 @@ export const postDog = payload => dispatch => {
             });
         });
 }
-
-// export const putDog = payload => dispatch => {
-//     return fetch(`http://localhost:3001/dogs`, {
-//         method: 'PUT',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(payload)
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             dispatch({
-//                 type: PUT_DOG,
-//                 payload: data
-//             });
-//         })
-//         .catch(error => {
-//             dispatch({
-//                 type: ERROR,
-//                 payload: ['Yikes! There was a problem while updating dog', error]
-//             });
-//         });
-// }
 
 export const deleteDog = id => dispatch => {
     return fetch(`http://localhost:3001/dogs/${id}`, {

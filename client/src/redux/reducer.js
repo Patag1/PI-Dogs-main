@@ -1,12 +1,12 @@
 import {
     GET_DOGS,
+    DOGS_TEMP,
     DOGS_FILTER,
     DOGS_SORT,
     GET_DOG_ID,
     POST_DOG,
     DELETE_DOG,
     GET_TEMPS,
-    // PUT_DOG,
     PAGE
 } from './actions';
 
@@ -32,33 +32,38 @@ const rootReducer = (state = initialState, action) => {
                 error: null
             }
         
+        case DOGS_TEMP:
+            const { search } = action.payload;
+            const regex = new RegExp(search, 'ig');
+            let filtered0 = state.dogs.filter(dogs => dogs.temperaments.some(temp => regex.test(temp.name)));
+            return {
+                ...state,
+                filteredDogs: filtered0,
+                error: null,
+            }
+
         case DOGS_FILTER:
             const { value } = action.payload;
-            let filtered;
+            let filtered1;
             if (value === 'API') {
-                filtered = state.dogs.filter(dog => dog.image === 'image/url');
+                filtered1 = state.dogs.filter(dog => dog.image === 'image/url');
             } else if (value === 'DB') {
-                filtered = state.dogs.filter(dog => dog.image !== 'image/url');
-            } else {
-                const regex = new RegExp(value, 'ig');
-                filtered = state.dogs.filter(dogs => dogs.temperaments.some(temp => regex.test(temp.name)));
+                filtered1 = state.dogs.filter(dog => dog.image !== 'image/url');
             }
             return {
                 ...state,
-                filteredDogs: filtered,
+                filteredDogs: filtered1,
                 error: null
             }
 
         case DOGS_SORT:
-            const sort = action.payload;
-            // console.log(sort)
+            const { term } = action.payload;
             const sorted = state.dogs.sort((a, b) =>
-                sort === 'az' ? a.name.localeCompare(b.name)
-                : sort === 'za' ? b.name.localeCompare(a.name) : null
-                // : sort === 'asc' ? parseInt(b.weight.metric.split(' ')[0]) - parseInt(a.weight.metric.split(' ')[0])
-                // : parseInt(a.weight.metric.split(' ')[0]) - parseInt(b.weight.metric.split(' ')[0])
+                term === 'az' ? a.name.localeCompare(b.name)
+                : term === 'za' ? b.name.localeCompare(a.name) // : []
+                : term === 'asc' ? parseInt(b?.weight?.metric?.split(' ')[0]) - parseInt(a?.weight?.metric?.split(' ')[0])
+                : term === 'des' ? parseInt(a?.weight?.metric?.split(' ')[0]) - parseInt(b?.weight?.metric?.split(' ')[0]) : []
             );
-            // console.log(sorted)
             return {
                 ...state,
                 filteredDogs: sorted,
@@ -94,21 +99,6 @@ const rootReducer = (state = initialState, action) => {
                 filteredDogs: state.filteredDogs.filter(e => e.id !== action.payload.id),
                 error: null
             }
-            
-        // case PUT_ACTIVITY:
-        //     return {
-        //         ...state,
-        //         activities: state.activities.map(a => {
-        //             if (a.id === action.payload.id) {
-        //                 return {
-        //                     ...a,
-        //                     ...action.payload
-        //                 };
-        //             }
-        //             return a;
-        //         }),
-        //         error: null
-        //     }
 
         case PAGE:
             return {

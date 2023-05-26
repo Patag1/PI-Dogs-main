@@ -3,6 +3,7 @@ const { Op } = require('sequelize');
 const axios = require('axios');
 const { API_KEY } = process.env;
 const filterData = require('../middlewares/filter');
+const dbFormat = require('../middlewares/dbFormat');
 
 
 const getDogs = async (name) => {
@@ -54,26 +55,30 @@ const getDogs = async (name) => {
 
 
 const getDogById = async id => {
-    const intId = parseInt(id);
+    
+    if (!isNaN(id)) {        
+        const dogApi = await axios.get(API_KEY)
+            .then(response => filterData(response.data))
+            .then(data => data.filter(dog => dog.id == id))
+    
+        if (dogApi) return dogApi[0];
+    } else {
+        let dogDb = await Dog.findOne({
+            where: { id },
+            include: [
+                {
+                    model: Temperaments,
+                    attributes: ['id', 'name'],
+                    through: {attributes: []}
+                }
+            ]
+        });
 
-    const dogApi = await axios.get(API_KEY)
-        .then(response => filterData(response.data))
-        .then(data => data.filter(dog => dog.id === intId))
-
-    if (dogApi) return dogApi[0];
-
-    const dogDb = await Dog.findOne({
-        where: { id: intId },
-        include: [
-            {
-                model: Temperaments,
-                attributes: ['id', 'name'],
-                through: {attributes: []}
-            }
-        ]
-    });
-
-    if (dogDb) return dogDb
+        if (dogDb) {
+            dogDb = dbFormat(dogDb)
+            return dogDb;
+        }
+    }
 
     throw new Error('Dog not found')
 }
@@ -94,15 +99,11 @@ const postDog = async (
         lifespan,
     });
 
-    console.log(temperaments)
-
     const temps = await Temperaments.findAll({
         where: {
             id: temperaments
         }
     });
-
-    console.log(temps)
 
     await newDog.addTemperaments(temps);
 

@@ -6,8 +6,10 @@ import Error from './components/Error'
 import Loading from './components/Loading'
 import Navbar from './components/Navbar'
 import Icons from './components/Icons'
+import Edit from './components/Edit'
 import DogDetailCSS from '../styles/DogDetail.module.css'
 import NavbarCSS from '../styles/Navbar.module.css'
+import dogImg from '../images/dogDb.jpeg';
 
 const DogDetail = () => {
     const [loading, setLoading] = useState(true);
@@ -37,7 +39,7 @@ const DogDetail = () => {
                 })
             })
     }, [dispatch, id]);
-        
+
     const dog = useSelector(state => state.dog) || {};
 
     const height = `${system === 'met' ? dog?.height?.metric : dog?.height?.imperial} ${unit.hgt}`;
@@ -62,7 +64,13 @@ const DogDetail = () => {
                                 <div className={DogDetailCSS.header}>
                                     <h1>{dog?.name}</h1>
                                     <div className={DogDetailCSS.imgdiv}>
-                                        <img className={DogDetailCSS.img} src={dog?.image} alt={`dog${dog?.name}`} />
+                                        {
+                                            isNaN(dog?.id) ? (
+                                                <img className={DogDetailCSS.img} src={dog?.image} alt={`dog${dog?.name}`} />
+                                                ) : (
+                                                <img className={DogDetailCSS.img} src={dogImg} alt={`dog${dog?.name}`} />
+                                            )
+                                        }
                                     </div>
                                 </div>
                                 <div className={DogDetailCSS.specs}>
@@ -94,6 +102,11 @@ const DogDetail = () => {
                                     <button className={switchClass} onClick={() => setSystem(unit.toggle)}>
                                         {system === 'met' ? 'METRIC' : 'IMPERIAL'}
                                     </button>
+                                    {
+                                        isNaN(dog?.id) ? (
+                                            <Edit id={dog?.id} />
+                                        ) : []
+                                    }
                                 </div>
                             </div>
                         
