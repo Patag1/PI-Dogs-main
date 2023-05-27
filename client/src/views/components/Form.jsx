@@ -4,7 +4,7 @@ import { postDog, getTemps } from '../../redux/actions'
 import Icons from './Icons';
 import NavbarCSS from '../../styles/Navbar.module.css'
 
-import { emptyCheck, errorCheck, handleChange } from '../../lib/handleChangeForm';
+import { emptyCheck, errorCheck, nameFormat, handleChange } from '../../lib/form';
 
 const Form = ({ show }) => {
     
@@ -33,6 +33,8 @@ const Form = ({ show }) => {
         lifespan: true,
         temps: true
     });
+
+    console.log(error)
     
     const unit = system === 'met' ? {
         sys: 'met',
@@ -59,7 +61,7 @@ const Form = ({ show }) => {
 
         setForm({
             ...form,
-            temps: form.temps.split(',').map(t => t.trim().charAt(0).toLowerCase() + t.trim().slice(1))
+            name: nameFormat(form.name),
         })
 
         dispatch(postDog(form));

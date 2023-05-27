@@ -1,12 +1,14 @@
 import React from 'react'
-import Icons from './Icons'
 import LoadingCSS from '../../styles/Loading.module.css'
+import Loader from '../../images/loader.gif'
 
 const Loading = () => {
     return (
         <div className={LoadingCSS.body}>
-            <h1 className={LoadingCSS.h2}>Loading...</h1>
-            <Icons.Dog className={LoadingCSS.icon} size={200} color='black' />
+            <div className={LoadingCSS.container}>
+                <h1 className={LoadingCSS.h2}>Loading...</h1>
+                <img src={Loader} alt="loader-dog" className={LoadingCSS.gif} />
+            </div>
         </div>
     )
 }

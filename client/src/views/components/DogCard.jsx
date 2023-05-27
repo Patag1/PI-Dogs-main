@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import Icons from './Icons';
 import DogCardCSS from '../../styles/DogCard.module.css'
+import DogDb from '../../images/dogDb.png'
 
 const DogCard = props => {
   const {
@@ -19,7 +20,7 @@ const DogCard = props => {
   return (
     <Link to={`/dogs/${id}`} className={DogCardCSS.card}>
       {
-        image === 'image/url' ? (
+        isNaN(id) ? (
           <div className={DogCardCSS.ctnbadge}>
             <p className={DogCardCSS.badgemsg}>Created by you!</p>
             <Icons.Bone className={DogCardCSS.badge} size={20} color='black' />
@@ -32,7 +33,8 @@ const DogCard = props => {
             image !== 'image/url' ? (
               <img className={DogCardCSS.img} src={image} alt={`${name}${id}`} />
             ) : (
-              <img className={DogCardCSS.img} src={process.env.PUBLIC_URL + '/dog.png'} alt="newdog" />
+              // <img className={DogCardCSS.img} src={process.env.PUBLIC_URL + '/dog.png'} alt="newdog" />
+              <img className={DogCardCSS.img} src={DogDb} alt="dbdog" />
             )
           }
         </div>

@@ -10,40 +10,95 @@
 }
 
 .container {
+    width: 350px;
+    height: 500px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
-    padding: 0px 40px 40px 40px;
-    width: 61%;
+    padding: 40px;
+    padding-top: 0;
     background-color: #355C7D;
     border-radius: 2vh;
 }
 
-.container h1 {
+.header {
     margin: 21px;
-}
-
-.temps {
-    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    background-color: #BBB;
+    gap: 20px;
+}
+
+.header h1 {
+    font-size: 1.5rem;
+}
+
+.bone {
+    width: 40px;
+}
+
+.temps {
+    height: 80%;
+    width: 90%;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #EEE;
     border-radius: 1vh;
+}
+
+.temps::-webkit-scrollbar {
+    width: 12px;
+    border-radius: 0 1vh 1vh 0;
+}
+
+.temps::-webkit-scrollbar-thumb {
+    border-radius: 1vh;
+    background-color: #BBB;
+}
+.temps::-webkit-scrollbar-thumb:hover {
+    background-color: #ACACAC;
 }
 
 .temp {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px;
     background: #EEE;
-    border: 1px solid black;
     border-radius: 1vh;
-    transition: transform .3s ease;
+    transition: all .3s ease;
     cursor: default;
 }
 
+.arrow {
+    opacity: 0;
+    transition: all .3s ease;
+}
+
+.temp:hover .arrow {
+    opacity: 1;
+    animation: rock 1s ease infinite;
+}
+
+@keyframes rock {
+    0% {
+        transform: translateX(0px);
+    }
+    50% {
+        transform: translateX(-5px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
 .temp:hover {
-    transform: scale(1.05);
+    background-color: #BBB;
 }

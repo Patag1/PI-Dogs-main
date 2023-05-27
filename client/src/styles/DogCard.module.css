@@ -6,24 +6,26 @@
     flex-direction: column;
     width: 252px;
     height: 350px;
-    padding: 2px 2px 15px 2px;
+    padding: 4px 4px 15px 4px;
     background-color: #F5F5F5;
-    border: 1px solid black;
-    border-radius: 2vh 0 2vh 0;
-    box-shadow: .5vh .5vh 0 black;
+    box-shadow: 5px 5px 0 #0F0F0F;
     text-decoration: none;
-    color: black;
+    color: #0F0F0F;
     transition: all .5s ease;
 }
 
 .card:hover {
-    box-shadow: 1vh 1vh 0 black;
+    box-shadow: 7px 7px 0 #0F0F0F;
     transform: scale(1.05);
 }
 
 .card:active {
     box-shadow: none;
     transform: scale(0.95);
+}
+
+.card h1 {
+    font-size: 1.5rem;
 }
 
 .ctnbadge {
@@ -39,10 +41,11 @@
 .badgemsg {
     position: absolute;
     height: 18px;
-    width: 130px;
+    width: 155px;
     opacity: 0;
     right: -10%;
-    padding: 2px 0 2px 5px;
+    margin: 0;
+    padding: 2px 2px 5px 8px;
     color: rgba(172, 172, 172, 0.900);
     background-color: rgba(15, 15, 15, 0.900);
     border-radius: 2vh 0 0 2vh;
@@ -95,11 +98,9 @@
 .divimg {
     position: relative;
     overflow: hidden;
-    width: 250px;
+    width: 252px;
     height: 175px;
-    border: 1px solid black;
     border-bottom: 2px solid black;
-    border-radius: 1.8vh 0 0 0;
 }
 
 .img {

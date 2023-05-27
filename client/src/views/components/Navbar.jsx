@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import Icons from './Icons';
 import Form from './Form'
+import Logo from '../../images/bone.png'
 import NavbarCSS from '../../styles/Navbar.module.css'
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Navbar = () => {
   const links = [{
@@ -24,7 +25,7 @@ const Navbar = () => {
   return (
     <div className={NavbarCSS.nav}>
       <div className={NavbarCSS.main}>
-        <Icons.Dog size={40} color='white' className={NavbarCSS.logo} />
+        <Icons.Dog size={30} color='white' className={NavbarCSS.logo} />
         <div className={NavbarCSS.links}>
           {
             links.map((link, index) => (

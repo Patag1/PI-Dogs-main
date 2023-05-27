@@ -9,7 +9,7 @@ import Icons from './components/Icons'
 import Edit from './components/Edit'
 import DogDetailCSS from '../styles/DogDetail.module.css'
 import NavbarCSS from '../styles/Navbar.module.css'
-import dogImg from '../images/dogDb.jpeg';
+import dbDog from '../images/dogDb.png';
 
 const DogDetail = () => {
     const [loading, setLoading] = useState(true);
@@ -28,7 +28,7 @@ const DogDetail = () => {
     const dispatch = useDispatch();
 
     const { id } = useParams();
-    
+
     useEffect(() => {
         dispatch(getDogById(id))
             .then(() => setLoading(false))
@@ -65,16 +65,16 @@ const DogDetail = () => {
                                     <h1>{dog?.name}</h1>
                                     <div className={DogDetailCSS.imgdiv}>
                                         {
-                                            isNaN(dog?.id) ? (
+                                            !isNaN(dog?.id) ? (
                                                 <img className={DogDetailCSS.img} src={dog?.image} alt={`dog${dog?.name}`} />
                                                 ) : (
-                                                <img className={DogDetailCSS.img} src={dogImg} alt={`dog${dog?.name}`} />
+                                                <img className={DogDetailCSS.dbDog} src={dbDog} alt={`dog${dog?.name}`} />
                                             )
                                         }
                                     </div>
                                 </div>
                                 <div className={DogDetailCSS.specs}>
-                                    <div>
+                                    <div className={DogDetailCSS.datas}>
                                         <div className={DogDetailCSS.data}>
                                             <p>Height:</p>
                                             <p>{height}</p>
