@@ -6,7 +6,9 @@ import {
     GET_DOG_ID,
     POST_DOG,
     DELETE_DOG,
+    POST_FAV,
     GET_TEMPS,
+    LOADING,
     PAGE
 } from './actions';
 
@@ -16,8 +18,9 @@ const initialState = {
     filteredDogs: [],
     dog: {},
     temps: [],
+    favs: [],
+    loading: false,
     page: 0,
-    error: null
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -29,7 +32,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 dogs: action.payload,
                 filteredDogs: action.payload,
-                error: null
+                loading: false,
             }
         
         case DOGS_TEMP:
@@ -39,7 +42,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 filteredDogs: filtered0,
-                error: null,
+                loading: false,
             }
 
         case DOGS_FILTER:
@@ -53,7 +56,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 filteredDogs: filtered1,
-                error: null
+                loading: false,
             }
 
         case DOGS_SORT:
@@ -67,14 +70,14 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 filteredDogs: sorted,
-                error: null
+                loading: false,
             }
 
         case GET_DOG_ID:
             return {
                 ...state,
                 dog: action.payload,
-                error: null
+                loading: false,
             }
         
         case POST_DOG:
@@ -82,14 +85,14 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 dogs: state.dogs.concat(action.payload),
                 filteredDogs: state.filteredDogs.concat(action.payload),
-                error: null
+                loading: false,
             }
 
         case GET_TEMPS:
             return {
                 ...state,
                 temps: action.payload,
-                error: null
+                loading: false,
             }
 
         case DELETE_DOG:
@@ -97,14 +100,28 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 dogs: state.dogs.filter(e => e.id !== action.payload.id),
                 filteredDogs: state.filteredDogs.filter(e => e.id !== action.payload.id),
-                error: null
+                loading: false,
+            }
+
+        case POST_FAV:
+            if (!isNaN(action.payload)) action.payload = parseInt(action.payload);
+            return {
+                ...state,
+                favs: [state.favs, state.dogs.filter(d => d === action.payload)],
+                loading: false,
+            }
+
+        case LOADING:
+            return {
+                ...state,
+                loading: true,
             }
 
         case PAGE:
             return {
                 ...state,
                 page: action.payload,
-                error: null
+                loading: false,
             }
 
         default:

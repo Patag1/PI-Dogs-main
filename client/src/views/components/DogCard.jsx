@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
+import { postFav } from '../../redux/actions';
 import Icons from './Icons';
 import DogCardCSS from '../../styles/DogCard.module.css'
 import DogDb from '../../images/dogDb.png'
@@ -13,12 +15,21 @@ const DogCard = props => {
     weight,
   } = props.data;
 
+  const [fav, setFav] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const handleFav = (e) => {
+    dispatch(postFav(e.target.value))
+    setFav(!fav);
+  }
+
   const wgtDbApi = image === 'image/url' ? weight : `${weight?.metric} kg`;
 
-  // image === 'image/url' && console.log(props.data)
+  const favClass = `${DogCardCSS.fav} ${fav ? DogCardCSS.favactive : ''}`;
 
   return (
-    <Link to={`/dogs/${id}`} className={DogCardCSS.card}>
+    <div className={DogCardCSS.card}>
       {
         isNaN(id) ? (
           <div className={DogCardCSS.ctnbadge}>
@@ -28,17 +39,21 @@ const DogCard = props => {
         ) : []
       }
       <div className={DogCardCSS.imgttl}>
-        <div className={DogCardCSS.divimg}>
-          {
-            image !== 'image/url' ? (
-              <img className={DogCardCSS.img} src={image} alt={`${name}${id}`} />
-            ) : (
-              // <img className={DogCardCSS.img} src={process.env.PUBLIC_URL + '/dog.png'} alt="newdog" />
-              <img className={DogCardCSS.img} src={DogDb} alt="dbdog" />
-            )
-          }
+        <Link to={`/dogs/${id}`} >
+          <div className={DogCardCSS.divimg}>
+            {
+              image !== 'image/url' ? (
+                <img className={DogCardCSS.img} src={image} alt={`${name}${id}`} />
+              ) : (
+                <img className={DogCardCSS.img} src={DogDb} alt="dbdog" />
+              )
+            }
+          </div>
+        </Link>
+        <div className={DogCardCSS.header}>
+          <h1 className={DogCardCSS.h1}>{name}</h1>
+          <Icons.Heart value={id} onClick={(e) => handleFav(e)} className={favClass} size={20} color='black' />
         </div>
-        <h1 className={DogCardCSS.h1}>{name}</h1>
       </div>
       <div className={DogCardCSS.content}>
         <span className={DogCardCSS.info}>Temperaments <Icons.Info className={DogCardCSS.infoicon} size={20} color='black' />
@@ -54,7 +69,7 @@ const DogCard = props => {
         </span>
         <p className={DogCardCSS.txt}>Weight: {wgtDbApi}</p>
       </div>
-    </Link>
+    </div>
   )
 }
 

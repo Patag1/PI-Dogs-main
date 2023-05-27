@@ -34,7 +34,7 @@ const Form = ({ show }) => {
         temps: true
     });
 
-    console.log(error)
+    // console.log(error)
     
     const unit = system === 'met' ? {
         sys: 'met',
@@ -73,7 +73,7 @@ const Form = ({ show }) => {
             ...form,
             temps: form.temps.filter(t => t !== e.target.name)
         })
-        console.log(form.temps)
+        // console.log(form.temps)
     }
 
     const renderMsg = errorCheck(error) && !emptyCheck(form);

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import Icons from './Icons';
 import Form from './Form'
-import Logo from '../../images/bone.png'
+import Doge from '../../images/doge.png'
 import NavbarCSS from '../../styles/Navbar.module.css'
 
 const Navbar = () => {
@@ -13,6 +13,9 @@ const Navbar = () => {
   }, {
     name: 'Temperaments',
     path: '/temperaments',
+  }, {
+    name: 'Favorites',
+    path: '/favs',
   }, {
     name: 'About',
     path: '/about',
@@ -25,7 +28,8 @@ const Navbar = () => {
   return (
     <div className={NavbarCSS.nav}>
       <div className={NavbarCSS.main}>
-        <Icons.Dog size={30} color='white' className={NavbarCSS.logo} />
+        <img src={Doge} alt="dog" className={NavbarCSS.logo} />
+        {/* <Icons.Dog size={30} color='white' className={NavbarCSS.logo} /> */}
         <div className={NavbarCSS.links}>
           {
             links.map((link, index) => (

@@ -19,13 +19,34 @@
     transform: scale(1.05);
 }
 
-.card:active {
-    box-shadow: none;
-    transform: scale(0.95);
+.header {
+    margin: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
-.card h1 {
+.header h1 {
+    margin: 0;
     font-size: 1.5rem;
+    width: 90%;
+}
+
+.fav {
+    margin-top: 5px;
+    transition: all .1s ease;
+}
+
+.fav:hover {
+    transform: scale(1.1);
+}
+
+.fav:active {
+    transform: scale(0.9);
+}
+
+.favactive {
+    fill: #E34748;
 }
 
 .ctnbadge {
@@ -101,6 +122,11 @@
     width: 252px;
     height: 175px;
     border-bottom: 2px solid black;
+}
+
+.divimg:active {
+    box-shadow: none;
+    transform: scale(0.95);
 }
 
 .img {

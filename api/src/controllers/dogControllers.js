@@ -34,8 +34,8 @@ const getDogs = async (name) => {
         return { message: 'No dogs found' };
     }
 
-    const dogsApi = await axios.get(API_KEY)
-        .then(response => filterData(response.data));
+    const {data: dogsdata} = await axios.get(API_KEY)
+    const dogsApi = filterData(dogsdata)
 
     const dogsDb = await Dog.findAll({
         attributes: {

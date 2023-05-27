@@ -4,6 +4,7 @@ import Landing from './views/Landing';
 import Dogs from './views/Dogs';
 import DogDetail from './views/DogDetail';
 import Temperaments from './views/Temperaments';
+import Favorites from './views/Favorites';
 import About from './views/About';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/dogs" exact component={Dogs} />
           <Route path="/dogs/:id" exact component={DogDetail} />
           <Route path="/temperaments" exact component={Temperaments} />
+          <Route path="/favs" exact component={Favorites} />
           <Route path="/about" exact component={About} />
         </Switch>
       </div>

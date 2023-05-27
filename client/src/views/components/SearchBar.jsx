@@ -1,22 +1,33 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { getDogs, dogsFilter, dogsSort, page } from '../../redux/actions'
 import Icons from './Icons'
 import SearchCSS from '../../styles/SearchBar.module.css'
 import NavbarCSS from '../../styles/Navbar.module.css'
+import { DogsContext } from '../../context/DogsProvider'
 
 const SearchBar = () => {
   const [term, setTerm] = useState('NAME');
   const [origin, setOrigin] = useState('API');
-  
+  const [inputText, setInputText] = useState("");
+  const { loading } = useContext(DogsContext)
+
   const termToggle = term === 'NAME' ? 'TEMP' : 'NAME';
 
   const dispatch = useDispatch();
+  const renderDogs = ( ) => {
+    console.log(inputText)
+    if (term === 'NAME') return dispatch(getDogs(inputText));
+    dispatch(dogsFilter(inputText));
+  };
+
+  useEffect(() => {
+    renderDogs();
+  },[inputText])
 
   const handleSearch = e => {
     const { value } = e.target;
-    if (term === 'NAME') return dispatch(getDogs(value));
-    dispatch(dogsFilter(value));
+    setInputText(value);
   }
 
   const originToggle = origin === 'API' ? 'DB' : 'API';
@@ -58,10 +69,9 @@ const SearchBar = () => {
 
   return (
     <div className={SearchCSS.body}>
-
       <div className={SearchCSS.srcdiv}>
         <Icons.Search size={25} color='white' />
-        <input className={SearchCSS.search} type="text" placeholder="Search by" onChange={handleSearch} />
+        <input className={SearchCSS.search} value={inputText}  type="text" placeholder="Search by" onChange={handleSearch} />
         <button className={btn2} onClick={() => setTerm(termToggle)}>{term}</button>
         <div className={SearchCSS.origin}>
           <button className={btn2} name={origin} onClick={(e) => handleFilter(e)}>{origin}</button>
