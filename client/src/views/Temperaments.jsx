@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getTemps } from '../redux/actions'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Loading from './components/Loading';
 import Error from './components/Error';
 import Navbar from './components/Navbar';
@@ -11,25 +10,12 @@ import Icons from './components/Icons';
 import Bone from '../images/bone.png';
 
 const Temperaments = () => {
-  const [loading, setLoading] = useState(true)
   const [error, setError] = useState({
     error: false,
     message: ''
   });
 
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getTemps())
-      .then(() => setLoading(false))
-      .catch(error => {
-        setError({
-          error: true,
-          message: error.message
-        });
-      })
-  }, [dispatch])
-
+  const loading = useSelector(state => state.temps)
   const temps = useSelector(state => state.temps)
 
   return (

@@ -38,7 +38,7 @@ const DogDetail = () => {
                     message: error.message,
                 })
             })
-    }, [dispatch, id]);
+    }, []);
 
     const dog = useSelector(state => state.dog) || {};
 

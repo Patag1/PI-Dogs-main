@@ -14,7 +14,10 @@ const Error = (props) => {
           <h1 className={ErrorCSS.h1}>Error</h1>
           <Icons.AlertTriangle size={20} color='white' />
         </div>
-        <p className={ErrorCSS.p}>{props.msg}</p>
+        <div>
+          <p className={ErrorCSS.p}>{props.msg.userMsg}</p>
+          <p className={ErrorCSS.p}>{props.msg.devMsg}</p>
+        </div>
       </div>
     </div>
   )

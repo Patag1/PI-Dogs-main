@@ -7,7 +7,9 @@ import {
     POST_DOG,
     DELETE_DOG,
     GET_TEMPS,
-    PAGE
+    LOADING,
+    PAGE,
+    ERROR,
 } from './actions';
 
 
@@ -16,8 +18,9 @@ const initialState = {
     filteredDogs: [],
     dog: {},
     temps: [],
+    loading: false,
     page: 0,
-    error: null
+    error: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -29,17 +32,20 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 dogs: action.payload,
                 filteredDogs: action.payload,
-                error: null
+                loading: false,
+                error: false
             }
         
         case DOGS_TEMP:
             const { search } = action.payload;
             const regex = new RegExp(search, 'ig');
             let filtered0 = state.dogs.filter(dogs => dogs.temperaments.some(temp => regex.test(temp.name)));
+            console.log(filtered0);
             return {
                 ...state,
                 filteredDogs: filtered0,
-                error: null,
+                loading: false,
+                error: false
             }
 
         case DOGS_FILTER:
@@ -53,7 +59,8 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 filteredDogs: filtered1,
-                error: null
+                loading: false,
+                error: false
             }
 
         case DOGS_SORT:
@@ -67,14 +74,16 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 filteredDogs: sorted,
-                error: null
+                loading: false,
+                error: false
             }
 
         case GET_DOG_ID:
             return {
                 ...state,
                 dog: action.payload,
-                error: null
+                loading: false,
+                error: false
             }
         
         case POST_DOG:
@@ -82,14 +91,16 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 dogs: state.dogs.concat(action.payload),
                 filteredDogs: state.filteredDogs.concat(action.payload),
-                error: null
+                loading: false,
+                error: false
             }
 
         case GET_TEMPS:
             return {
                 ...state,
                 temps: action.payload,
-                error: null
+                loading: false,
+                error: false
             }
 
         case DELETE_DOG:
@@ -97,14 +108,29 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 dogs: state.dogs.filter(e => e.id !== action.payload.id),
                 filteredDogs: state.filteredDogs.filter(e => e.id !== action.payload.id),
-                error: null
+                loading: false,
+                error: false
+            }
+        
+        case LOADING:
+            return {
+                ...state,
+                loading: true,
+                error: false
             }
 
         case PAGE:
             return {
                 ...state,
                 page: action.payload,
-                error: null
+                loading: false,
+                error: false,
+            }
+
+        case ERROR:
+            return {
+                ...state,
+                error: action.payload,
             }
 
         default:

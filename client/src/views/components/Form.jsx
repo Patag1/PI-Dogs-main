@@ -33,8 +33,6 @@ const Form = ({ show }) => {
         lifespan: true,
         temps: true
     });
-
-    console.log(error)
     
     const unit = system === 'met' ? {
         sys: 'met',
